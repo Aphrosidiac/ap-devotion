@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AP Devotion
+
+Company portfolio website for **AP Devotion** — custom systems and web development for Malaysian SMEs.
+
+## Tech Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **Styling:** Tailwind CSS v4
+- **Animations:** GSAP + ScrollTrigger, Lenis smooth scroll, Motion (framer-motion successor)
+- **Icons:** Lucide React
+- **Fonts:** Inter (body), Sora (headings)
+- **Deploy target:** Cloudflare Pages
+
+## Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Main site — hero, services, process, projects, about, CTA |
+| `/contact` | Contact form + WhatsApp link |
+| `/showcase` | Interactive showcase — parallax, build sequence, horizontal scroll gallery |
+| `/test` | Development playground for testing components |
+
+## Key Features
+
+- **Dark glassmorphism theme** — `#060b18` background, `#00d4ff` cyan accent, glass cards with `backdrop-filter`
+- **Ambient gradient orbs** — fixed-position colored blobs that give `backdrop-filter` something to blur through
+- **TiltCard component** — 3D mouse-tracking tilt, cursor spotlight, glowing glass border, underglow (zero React re-renders, uses refs + rAF + lerp)
+- **Split hero** — left-aligned text + floating dashboard mockup with mouse parallax
+- **Showcase build sequence** — scroll-pinned GSAP timeline that assembles a dashboard piece by piece
+- **Horizontal scroll gallery** — mockup-dominant cards with real UI wireframes
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+## Deploy to Cloudflare Pages
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+# Upload the .next/standalone or use Cloudflare's Next.js integration
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+  app/
+    (main)/           # Pages with navbar + footer
+      page.tsx        # Home
+      contact/        # Contact page
+    showcase/         # Immersive showcase (no navbar/footer)
+    test/             # Dev playground
+    globals.css       # Theme, glass utilities, keyframes
+    layout.tsx        # Root layout with fonts + ambient orbs
+  components/
+    Navbar.tsx        # Pill-style centered nav
+    Footer.tsx        # Site footer
+    TiltCard.tsx      # 3D tilt + spotlight + glass border
+    GlassCard.tsx     # Simple glass card with intersection observer
+    SectionHeading.tsx
+    AmbientOrbs.tsx   # Fixed gradient orbs for glass effect
+    sections/
+      Hero.tsx        # Split layout hero with dashboard mockup
+      Services.tsx    # Service cards with TiltCard
+      Process.tsx     # Process steps with TiltCard
+      Projects.tsx    # Featured + secondary project cards
+      About.tsx       # Value proposition cards
+      CTA.tsx         # Call to action section
+```
