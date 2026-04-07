@@ -11,6 +11,8 @@ const featuredProjects = [
     description:
       "Complete car workshop management system with document generation, stock tracking, customer management, and real-time dashboard analytics. Built for a Malaysian automotive workshop to replace manual spreadsheet workflows.",
     tech: ["Vue 3", "Express", "PostgreSQL", "Chart.js"],
+    image: "/projects/dreamgarage.png",
+    url: "https://dreamgarage.my",
   },
   {
     title: "Shuda Logistics",
@@ -18,6 +20,8 @@ const featuredProjects = [
     description:
       "Distribution and logistics management platform handling delivery scheduling, route management, and real-time tracking for a Malaysian logistics company.",
     tech: ["Vue 3", "Express", "PostgreSQL"],
+    image: "/projects/shudalogistics.png",
+    url: "https://shudalogistics.my",
   },
 ];
 
@@ -45,42 +49,13 @@ const otherProjects = [
   },
 ];
 
-function BrowserMockup({ accent }: { accent: string }) {
-  return (
-    <div className="w-[88%] mx-auto rounded-xl border border-white/[0.1] bg-[#080e1e] overflow-hidden shadow-2xl shadow-black/50">
-      <div className="h-8 bg-[#0c1428] border-b border-white/[0.08] flex items-center px-3 gap-2">
-        <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-        <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
-        <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
-        <div className="flex-1 mx-6">
-          <div className="h-4 rounded-md bg-white/[0.05] border border-white/[0.08] max-w-[200px] mx-auto" />
-        </div>
-      </div>
-      <div className="p-5 space-y-3">
-        <div className="flex gap-3 mb-4">
-          <div className={`w-20 h-3 rounded-full ${accent}`} />
-          <div className="w-14 h-3 rounded-full bg-white/[0.08]" />
-          <div className="w-16 h-3 rounded-full bg-white/[0.08]" />
-        </div>
-        <div className="grid grid-cols-3 gap-3">
-          <div className="h-16 rounded-lg bg-white/[0.04] border border-white/[0.06]" />
-          <div className="h-16 rounded-lg bg-white/[0.04] border border-white/[0.06]" />
-          <div className="h-16 rounded-lg bg-white/[0.04] border border-white/[0.06]" />
-        </div>
-        <div className="h-20 rounded-lg bg-white/[0.04] border border-white/[0.06]" />
-      </div>
-    </div>
-  );
-}
 
 function FeaturedCard({
   project,
   delay,
-  accentColor,
 }: {
   project: (typeof featuredProjects)[0];
   delay: number;
-  accentColor: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -108,8 +83,14 @@ function FeaturedCard({
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
       }`}
     >
-      <div className="relative py-8 bg-gradient-to-b from-accent/[0.03] to-transparent">
-        <BrowserMockup accent={accentColor} />
+      <div className="relative bg-gradient-to-b from-accent/[0.03] to-transparent">
+        <a href={project.url} target="_blank" rel="noopener noreferrer" className="block">
+          <img
+            src={project.image}
+            alt={`${project.title} website screenshot`}
+            className="w-full rounded-t-2xl object-cover object-top"
+          />
+        </a>
       </div>
       <div className="p-8 pt-4">
         <span className="text-[11px] font-semibold text-accent uppercase tracking-[0.15em]">
@@ -154,7 +135,6 @@ export default function Projects() {
               key={project.title}
               project={project}
               delay={i * 150}
-              accentColor={i === 0 ? "bg-accent/40" : "bg-purple-500/40"}
             />
           ))}
         </div>
